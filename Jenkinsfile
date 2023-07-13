@@ -68,21 +68,21 @@ pipeline {
             }
         }
         
-        stage('Push the changed deployment file to git') {
-            steps {
-                script {
-                    sh """
-                      git config --global user.name "kanwarsaad"
-                      git config --global user.email "kanwarsaad@gmail.com"
-                      git add deployment.yml
-                      git commit -m "update the deployment file"
-                    """
-                    withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
-                    sh "git push https://github.com/kanwarsaadali/porfolio.git master" 
-}
+//         stage('Push the changed deployment file to git') {
+//             steps {
+//                 script {
+//                     sh """
+//                       git config --global user.name "kanwarsaad"
+//                       git config --global user.email "kanwarsaad@gmail.com"
+//                       git add deployment.yml
+//                       git commit -m "update the deployment file"
+//                     """
+//                     withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+//                     sh "git push https://github.com/kanwarsaadali/porfolio.git master" 
+// }
                     
-                }
-            }
-        }
+//                 }
+//             }
+//         }
     }
 }
