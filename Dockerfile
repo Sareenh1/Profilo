@@ -3,6 +3,6 @@ WORKDIR /app
 COPY ./*.json /app/
 RUN npm install --force
 RUN yard add react-scripts
-COPY ..
+COPY . .
 EXPOSE 3000
 CMD ["npm", "start"]
