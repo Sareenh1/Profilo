@@ -114,7 +114,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
     - Optionally, you can set up a secret and configure Jenkins to validate the webhook payload using this secret.
     - Save your webhook configuration.
 11. **Access Docker Container**:
-    - Run your Docker container (e.g., `docker run -p 3000:80 myapp`).
     - Access it via `http://<your-ec2-public-ip>:3000`.
 
 Remember to replace `<your-ec2-public-ip>` with your actual EC2 instance's public IP address.
