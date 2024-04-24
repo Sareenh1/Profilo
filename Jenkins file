@@ -1,8 +1,71 @@
-
 pipeline{
     agent any
     
     environment{
         DOCKERHUB_USERNAME='sareen'
         APP_NAME='portfolio'
-        IMAGE_NAME="${DOCKERHUB_USERNAME}/${APP_NAME
+        IMAGE_NAME="${DOCKERHUB_USERNAME}/${APP_NAME}"
+    }
+    stages{
+        stage('cleanup workspace'){
+            steps{
+                script{
+                    cleanWs()
+                }
+            }
+        }
+        stage('checkout portfolio'){
+            steps{
+                script{
+                    git credentials:'github',
+                    url:'https://github.com/Sareenh1/Task_1-InternCareer_Portfolio.git',
+                    branch:'master'
+                }
+            }
+        }
+        stage('stop docker container'){
+            steps{
+                script{
+                    sh "docker stop portfolio"
+                }
+            }
+        }
+        stage('remove docker container'){
+            steps{
+                script{
+                    sh "docker rm portfolio"
+                }
+            }
+        }
+        stage('build docker image'){
+            steps{
+                script{
+                    docker_image=docker.build(IMAGE_NAME)
+                }
+            }
+        }
+        stage('run docker container'){
+            steps{
+                script{
+                    sh "docker run -d --name portfolio -p 3000:3000 \"${DOCKERHUB_USERNAME}/${APP_NAME}\""
+                }
+            }
+        }
+        stage('Docker Login') {
+    steps {
+        script {
+            withDockerRegistry([credentialsId: 'dockerhub']) {
+                    // Perform any Docker operations here
+                }
+        }
+    }
+}
+        stage('push docker image'){
+           steps{
+              script{
+                  sh "docker push sareen/portfolio:latest"
+        }
+    }
+}
+    }
+}
