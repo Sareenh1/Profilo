@@ -104,8 +104,16 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 9. **Configure DockerHub in Jenkins**:
    - In Jenkins, go to "Manage Jenkins" > "Configure System."
    - Add your DockerHub username and paste the token.
-
-10. **Access Docker Container**:
+     
+10. **Attaching Webhook in GitHub**:
+   - Go to your GitHub repository.
+   - Under "Settings," select "Webhooks."
+   - Click on "Add webhook."
+   - Set the payload URL to your Jenkins server's URL followed by /github-webhook/.
+   - Select the events you want to trigger the webhook (e.g., Push events).
+   - Optionally, you can set up a secret and configure Jenkins to validate the webhook payload using this secret.
+   - Save your webhook configuration.
+11. **Access Docker Container**:
     - Run your Docker container (e.g., `docker run -p 3000:80 myapp`).
     - Access it via `http://<your-ec2-public-ip>:3000`.
 
